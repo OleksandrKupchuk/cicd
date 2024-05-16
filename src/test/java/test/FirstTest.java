@@ -14,7 +14,6 @@ public class FirstTest {
 
     @Test(groups = {"playwright"})
     public void secondTest(){
-        //some code
         Page page = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(true)).newPage();
         page.navigate("https://the-internet.herokuapp.com/");
     }
