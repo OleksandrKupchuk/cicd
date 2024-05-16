@@ -11,10 +11,4 @@ public class FirstTest {
     public void firstTest(){
         Selenide.open("https://the-internet.herokuapp.com/");
     }
-
-    @Test(groups = {"playwright"})
-    public void secondTest(){
-        Page page = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(true)).newPage();
-        page.navigate("https://the-internet.herokuapp.com/");
-    }
 }
