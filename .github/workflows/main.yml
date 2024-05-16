@@ -1,38 +1,22 @@
-name: Run Maven Tests
+name: Run TestNG tests
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      contents: read
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 17
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '17'
-        distribution: 'adopt'
-    - name: Setup ChromeDriver
-      uses: nanasess/setup-chromedriver@master
-    - name: Install Chrome
-      uses: browser-actions/setup-chrome@latest
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-    - name: Run tests
-      env:
-        chromeoptions.args: --no-sandbox,--headless,--disable-dev-shm-usage,--disable-gpu
-      run: mvn -B test -Dgroups=release
-    - name: Publish Test Report
-      if: success() || failure()
-      uses: scacap/action-surefire-report@v1
+        java-version: '11'
+
+    - name: Run TestNG tests
+      run: mvn clean test -Dgroups=release
