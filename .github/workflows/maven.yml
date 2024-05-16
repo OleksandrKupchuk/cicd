@@ -24,7 +24,7 @@ jobs:
         export DISPLAY=:99
         export CHROMEDRIVER_OPTS="--remote-debugging-port=9222 --disable-dev-shm-usage" # Add this line
         chromedriver $CHROMEDRIVER_OPTS --url-base=/wd/hub & # Modify this line
-        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+        sudo Xvfb -ac :99 > /dev/null 2>&1 & # optional
     - name: Install Chrome
       uses: browser-actions/setup-chrome@latest
       with:
