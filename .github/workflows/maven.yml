@@ -37,6 +37,11 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Run tests
       run: mvn clean test -Dgroups=release
-    - name: Publish Test Report
-      if: success() || failure()
-      uses: scacap/action-surefire-report@v1
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      if: always()
+      with:
+        files: |
+          test-results\**\*.xml
+          test-results\**\*.trx
+          test-results\**\*.json
