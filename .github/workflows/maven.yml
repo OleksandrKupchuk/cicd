@@ -24,10 +24,6 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Run tests
       run: mvn -Dtest=Test* -DfailIfNoTests=false test -Dgroups=release -Dbrowser=chrome
-    - name: Generate report
-      run: mvn allure:report
-    - name: Upload report
-      uses: actions/upload-artifact@v2
-      with:
-        name: allure-report
-        path: target/site/allure-maven/index.html
+    - name: Publish Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
