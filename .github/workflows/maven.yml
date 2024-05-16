@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions: write-all
     steps:
     - uses: actions/checkout@v2
@@ -20,11 +20,10 @@ jobs:
     - name: Setup ChromeDriver
       uses: nanasess/setup-chromedriver@v2
     - name: Start ChromeDriver
-      run:  |
-        export DISPLAY=:99
-        export CHROMEDRIVER_OPTS="--remote-debugging-port=9222 --disable-dev-shm-usage" # Add this line
-        chromedriver $CHROMEDRIVER_OPTS --url-base=/wd/hub & # Modify this line
-        sudo Xvfb -ac :99 > /dev/null 2>&1 & # optional
+      run: |
+        setx DISPLAY :99
+        setx CHROMEDRIVER_OPTS "--remote-debugging-port=9222 --disable-dev-shm-usage" # Add this line
+        chromedriver %CHROMEDRIVER_OPTS% --url-base=/wd/hub & # Modify this line
     - name: Install Chrome
       uses: browser-actions/setup-chrome@latest
       with:
