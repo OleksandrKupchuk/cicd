@@ -23,7 +23,7 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Run tests
-      run: mvn -Dtest=Test* -DfailIfNoTests=false test -Dgroups=release -Dbrowser=chrome
+      run: mvn clean test -Dgroups=release
     - name: Publish Test Report
       if: success() || failure()
       uses: scacap/action-surefire-report@v1
