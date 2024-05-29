@@ -28,6 +28,8 @@ jobs:
       run: |
         sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
         export DISPLAY=:99
+    - name: check chrome driver
+      run: pgrep chromedriver
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
