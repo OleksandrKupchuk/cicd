@@ -28,7 +28,7 @@ jobs:
       run: sudo mv /usr/bin/google-chrome /usr/bin/google-chrome-old && sudo ln -s /opt/google/chrome/google-chrome /usr/bin/google-chrome
     - name: Start ChromeDriver
       run: |
-        chromedriver --url-base=/wd/hub --port=4444 &
+        chromedriver --url-base=/wd/hub --port=4444 & sleep 3
     - name: check chrome driver
       run: pgrep chromedriver
     - name: Run tests
