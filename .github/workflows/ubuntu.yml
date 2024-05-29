@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests on ubuntu
 
 on:
   push:
@@ -19,15 +19,15 @@ jobs:
         distribution: 'adopt'
     - name: Setup ChromeDriver
       uses: nanasess/setup-chromedriver@v2
-    - name: Start ChromeDriver
-      run: |
-        sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
-        export DISPLAY=:99
     - name: Install Chrome
       uses: browser-actions/setup-chrome@latest
       with:
         chrome-version: '124'
         install-dependencies: true
+    - name: Start ChromeDriver
+      run: |
+        sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
+        export DISPLAY=:99
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
