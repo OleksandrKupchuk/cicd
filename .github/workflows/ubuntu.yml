@@ -35,7 +35,7 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Run tests
-      run: mvn clean test -Dgroups=release
+      run: mvn clean test -Dgroups=release -Dbrowser=chrome -Dchrome.options="--headless,--no-sandbox,--disable-dev-shm-usage"
     - name: Publish Test Report
       if: success() || failure()
       uses: scacap/action-surefire-report@v1
