@@ -24,10 +24,13 @@ jobs:
       with:
         chrome-version: '124'
         install-dependencies: true
-    - name: Start ChromeDriver
+    - name: Start Start Xvfb
       run: |
         sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
         export DISPLAY=:99
+    - name: Start ChromeDriver
+      run: |
+        chromedriver --url-base=/wd/hub --port=4444 &
     - name: check chrome driver
       run: pgrep chromedriver
     - name: Cache Maven packages
