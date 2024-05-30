@@ -26,6 +26,8 @@ jobs:
         install-dependencies: true
     - name: Move Chrome to /usr/bin
       run: sudo mv /usr/bin/google-chrome /usr/bin/google-chrome-old && sudo ln -s /opt/google/chrome/google-chrome /usr/bin/google-chrome
+    - name: Check /usr/bin
+      run: ls /usr/bin/google-chrome
     - name: Start ChromeDriver
       run: |
         chromedriver --url-base=/wd/hub --port=4444 & sleep 3
